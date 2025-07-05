@@ -15,6 +15,18 @@
 		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-17",
+					"linecount" : 12,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 490.0, 608.0, 150.0, 167.0 ],
+					"text" : "Make sure that the RX an TX lights on the Arduino are flashing when Max is sending data through the serial port. You might have to hit the \"close\" and \"open\" messages connected to the \"serial\" object on Max since Max and Arduino's serial monitor can't both be using it at the same time."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "message",
 					"numinlets" : 2,
