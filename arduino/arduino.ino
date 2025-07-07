@@ -90,7 +90,7 @@ void stopMotor(int motor) {
     Serial.println("Stopped X");
   } else if (motor == 2) {
     stepperY1.stop();
-    stepperY2.stop()
+    stepperY2.stop();
     isRunning[1], isRunning[2] = false;
     Serial.println("Stopped Y1/Y2");
   } else {
@@ -105,7 +105,7 @@ void processCommand(String cmd) {
 
   if (cmd.startsWith("POSITION")) {
     // parses the motor and position into motor and pos
-    int motor, pos = 0;
+    long motor, pos = 0;
     int idx1 = cmd.indexOf(' ');
     int idx2 = cmd.indexOf(' ', idx1 + 1);
     motor = cmd.substring(idx1 + 1, idx2).toInt();
@@ -114,7 +114,7 @@ void processCommand(String cmd) {
     setPosition(motor, pos);
   } else if (cmd.startsWith("SPEED")) {
     // parses the motor and speed into motor and val
-    int motor, speed = 0;
+    long motor, speed = 0;
     int idx1 = cmd.indexOf(' ');
     int idx2 = cmd.indexOf(' ', idx1 + 1);
     motor = cmd.substring(idx1 + 1, idx2).toInt();
@@ -157,13 +157,13 @@ void setup() {
 
   // With current hardware config, keep this because 7000 caused an electrical fire
   stepperX.setMaxSpeed(5000); // DONT CHANGE
-  stepperY1.setMaxSpeed(6000); // DONT CHANGE
-  stepperY2.setMaxSpeed(6000); // DONT CHANGE
+  stepperY1.setMaxSpeed(10000); // DONT CHANGE
+  stepperY2.setMaxSpeed(10000); // DONT CHANGE
 
   // Sets acceleration for each motor
   stepperX.setAcceleration(5000);
-  stepperY1.setAcceleration(5000);
-  stepperY2.setAcceleration(5000);
+  // stepperY1.setAcceleration(5000);
+  // stepperY2.setAcceleration(5000);
 
   // Initial movement for debugging
   stepperX.moveTo(500);
@@ -195,7 +195,14 @@ void loop() {
   }
 
   // Runs each motor with the config in setup()
+  // stepperX.setSpeed(5000);
+  stepperY1.setSpeed(8000);
+  stepperY2.setSpeed(8000);
+  // stepperX.runSpeedToPosition();
+  stepperY1.runSpeedToPosition();
+  stepperY2.runSpeedToPosition();
+  
   stepperX.run();
-  stepperY1.run();
-  stepperY2.run();
+  // stepperY1.run();
+  // stepperY2.run();
 }
